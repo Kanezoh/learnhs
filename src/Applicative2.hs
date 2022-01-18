@@ -40,3 +40,20 @@ testScores = [30221, 2141234, 142124,412414,412414]
 testUsers :: [User]
 testUsers = pure (User) <*> testNames <*> testIds <*> testScores
 
+allFmap :: Applicative f => (a -> b) -> f a -> f b
+allFmap func a = pure func <*> a
+
+example :: Int
+example = (*) ((+) 2 4) 6
+
+exampleMaybe :: Maybe Int
+exampleMaybe = pure (*) <*> (pure (+) <*> pure 2 <*> pure 4) <*> pure 6
+
+beerStock :: [Int]
+beerStock = [2,8]
+
+friends :: [Int]
+friends = [2, 3]
+
+beerDrink :: [Int]
+beerDrink = [3,4]
