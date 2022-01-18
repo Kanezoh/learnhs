@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Applicative
+      Applicative2
       Functor
       Lib
   other-modules:
