@@ -40,3 +40,17 @@ incMaybe = (+) <$> Just 1
 
 -- <*>で繋げる
 -- incMaybe <*> Just 1
+
+concatMaybe :: Maybe(String -> String)
+concatMaybe = (++) <$> Just "hoge"
+
+appMain :: IO()
+appMain = do
+  putStrLn "Enter the starting city name:"
+  startingInput <- getLine
+  let startingCity = Map.lookup startingInput locationDB
+  putStrLn "Enter the destination city name:"
+  destInput <- getLine
+  let destCity = Map.lookup destInput locationDB
+  let distance = haversine <$> startingCity <*> destCity
+  printDistance distance
