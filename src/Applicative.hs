@@ -28,6 +28,15 @@ haversine coords1 coords2 = earthRadius * c
         c = 2 * atan2 (sqrt a) (sqrt (1-a))
         earthRadius = 3961.0
 
+-- IOの場合
+haversineIO :: IO LatLong -> IO LatLong -> IO Double
+haversineIO coords1 coords2 = do
+  val1 <- coords1
+  val2 <- coords2
+  return $ haversine val1 val2
+-- IO <*> バージョンの場合
+-- haversineIO val1 val2 = haversine <$> val1 <*> val2
+
 printDistance :: Maybe Double -> IO ()
 printDistance Nothing = putStrLn "Error, invalid city site"
 printDistance (Just distance) = putStrLn (show distance ++ " miles")
@@ -43,6 +52,22 @@ incMaybe = (+) <$> Just 1
 
 concatMaybe :: Maybe(String -> String)
 concatMaybe = (++) <$> Just "hoge"
+
+-- コンテキスト内でデータ作成
+data User = User { name :: String
+                 , gamerId :: Int
+                 , score :: Int } deriving Show
+
+serverUsername :: Maybe String
+serverUsername = Just "sue"
+
+serverGamerId :: Maybe Int
+serverGamerId = Just 1337
+
+serverScore :: Maybe Int
+serverScore = Just 9001
+
+maybeUser = User <$> serverUsername <*> serverGamerId <*> serverScore
 
 appMain :: IO()
 appMain = do
