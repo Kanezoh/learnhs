@@ -29,6 +29,7 @@ library
       Applicative2
       Functor
       Lib
+      Monad
   other-modules:
       Paths_learn
   hs-source-dirs:
