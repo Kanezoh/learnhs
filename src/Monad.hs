@@ -23,7 +23,7 @@ creditsDB = Map.fromList [ ("ahgaskgha", 2000)
                           ,(";ghajkghaklhb", 150000)]
 
 creditsFromId :: GamerId -> Maybe PlayerCredits
-creditsFromId id = altLookupCredits $ lookupUserName id
+-- creditsFromId id = altLookupCredits $ lookupUserName id
 
 lookupUserName :: GamerId -> Maybe UserName
 lookupUserName id = Map.lookup id userNameDB
@@ -35,5 +35,24 @@ altLookupCredits :: Maybe UserName -> Maybe PlayerCredits
 altLookupCredits Nothing = Nothing
 altLookupCredits (Just username) = lookupCredits username
 
+-- bind演算子
+-- (>>=) :: Monad m => m a -> (a -> m b) -> m b
+creditsFromId id = lookupUserName id >>= lookupCredits
+
+type WillCold = Int
+
+gamerIdDB :: Map.Map WillCold GamerId
+gamerIdDB = Map.fromList [(1001,1),(1002,2),(1003,3),(1004,4),(1005,5),(1006,6)]
+
+lookupGamerId :: WillCold -> Maybe GamerId
+lookupGamerId id = Map.lookup id gamerIdDB
+
+-- いくつでも繋げる
+creditsFromWCId :: WillCold -> Maybe PlayerCredits
+creditsFromWCId id = lookupGamerId id >>= lookupUserName >>= lookupCredits
+
+echo :: IO()
+echo = getLine >>= putStrLn
+
 main :: IO()
-main = putStrLn ""
+main = echo
