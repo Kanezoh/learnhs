@@ -54,5 +54,13 @@ creditsFromWCId id = lookupGamerId id >>= lookupUserName >>= lookupCredits
 echo :: IO()
 echo = getLine >>= putStrLn
 
+askForName :: IO ()
+askForName = putStrLn "What is your name?"
+
+nameStatement :: String -> String
+nameStatement name = "Hello, " ++ name ++ "!"
+
 main :: IO()
-main = echo
+main = do
+  echo
+  (askForName >> getLine) >>= (\name -> return (nameStatement name)) >>= putStrLn
