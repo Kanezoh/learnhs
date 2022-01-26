@@ -30,6 +30,7 @@ library
       Functor
       Lib
       Monad
+      Monad2
   other-modules:
       Paths_learn
   hs-source-dirs:
