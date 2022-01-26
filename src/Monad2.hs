@@ -87,5 +87,17 @@ accessCandidateDB cId = do
 --test Nothing = "error id not found"
 --test (Just a) = a
 
+candidates :: [Candidate]
+candidates = [candidate1, candidate2, candidate3]
+
+accessCandidateList :: [Candidate] -> [String]
+accessCandidateList candidates = do
+  candidate <- candidates
+  let passed = viable candidate
+  let statement = if passed
+                  then "passed"
+                  else "failed"
+  return statement
+
 main :: IO()
 main = echo
