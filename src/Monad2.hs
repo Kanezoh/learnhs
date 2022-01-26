@@ -1,3 +1,5 @@
+import qualified Data.Map as Map
+
 echo :: IO()
 -- echo = getLine >>= putStrLn
 
@@ -49,6 +51,37 @@ readCandidate = do
                     , codeReview = codeGrade
                     , cultureFit = cultureFitGrade
                     , education = degree})
+
+-- Maybeコンテキスト
+candidate1 :: Candidate
+candidate1 = Candidate { candidateId = 1
+                       , codeReview = A
+                       , cultureFit = A
+                       , education = BA }
+
+candidate2 :: Candidate
+candidate2 = Candidate { candidateId = 2
+                       , codeReview = C
+                       , cultureFit = A
+                       , education = PhD }
+
+candidate3 :: Candidate
+candidate3 = Candidate { candidateId = 3
+                       , codeReview = A
+                       , cultureFit = B
+                       , education = MS }
+
+candidateDB :: Map.Map Int Candidate
+candidateDB = Map.fromList (zip [1,2,3] [candidate1, candidate2, candidate3])
+
+accessCandidateDB :: Int -> Maybe String
+accessCandidateDB cId = do
+  candidate <- Map.lookup cId candidateDB
+  let passed = viable candidate
+  let statement = if passed
+                  then "passed"
+                  else "failed"
+  return statement
 
 main :: IO()
 main = echo
