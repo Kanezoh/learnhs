@@ -83,5 +83,9 @@ accessCandidateDB cId = do
                   else "failed"
   return statement
 
+--test :: Maybe String -> String
+--test Nothing = "error id not found"
+--test (Just a) = a
+
 main :: IO()
 main = echo
