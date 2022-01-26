@@ -31,6 +31,7 @@ library
       Lib
       Monad
       Monad2
+      MonadTest
   other-modules:
       Paths_learn
   hs-source-dirs:
