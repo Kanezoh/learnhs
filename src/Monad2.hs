@@ -99,5 +99,15 @@ accessCandidateList candidates = do
                   else "failed"
   return statement
 
+-- 全てのコンテキストに対応させる
+accessCandidate :: Monad m => m Candidate -> m String
+accessCandidate candidates = do
+  candidate <- candidates
+  let passed = viable candidate
+  let statement = if passed
+                  then "passed"
+                  else "failed"
+  return statement
+
 main :: IO()
 main = echo
